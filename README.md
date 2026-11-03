@@ -56,7 +56,7 @@ of these factors within the forward programming of their iPSC cultures.
 
 ## Methodology
 
-##The three parts of this project had differing methodologies:
+## The three parts of this project had differing methodologies:
 
 ### Part 1: Training Logreg, Random Forest, XGBoost on internal RNA-Seq database:
 
@@ -106,8 +106,43 @@ candidates.
 Part 2 utilized the All RNA-Seq and ChIP-seq Sample and Signature Search or ARCHS4 database which 
 is a comprehensive repository of gene/transcript expression counts from the Gene Expression Omnibus 
 and the SRA. This database contains counts from bulk RNA-seq, single-cell RNA-seq, and ChIP-seq 
-experiments. All of the samples and expression values are contained within an HDF5 file that contains 
-a hierarchical metadata structure. 
+experiments. All of the samples and expression values are contained within an HDF5 file that has  
+a hierarchical metadata structure. The filtering of the HDF5 file was done through the 
+utilization of the archs4py and h5py packages in python. The metadata filtering strategy was as follows:
+
+Filter for transcriptomic data and filter out single-cell data from 'library_source' metadata.
+↓ 
+Extract all unique 'source_name_ch1' metadata and create individual source name text files that 
+contain source names for each cell type of interest. Filter out samples from diseased, edited, or 
+immortalized cell lines that did not come from primary cells or iPSCs. 
+↓ 
+Filter for known transcription factor genes. 
+
+*It is important to note that due to available RAM constraints in NYU's HPC environment, I had to 
+employ a chunking approach to filtering the ARCHS4 HDF5 file where these filters were performed 
+in chunks of 1000 samples or 1000 genes.*
+
+The final filtered ARCHS4 HDF5 file contained 63,324 samples of varying cell types with expression 
+values for 13,146 transcription factors. The chunking approach was used again to split this data 
+into training and testing datasets with a 75:25 split. 
+
+The training data was highly unbalanced with varying number of samples for each cell type, so the 
+oversampling methods of Random Oversampler, SMOTE, and BorderlineSMOTE were used. Prior to 
+oversampling, the training and testing data were log2 transformed and not scaled. I decided that 
+scaling was unnecessary since it had no major effect on the improvement of the model's evaluation 
+metrics during training. 
+
+I made a function that trained a keras neural network model with two dense layers containing 250 
+nodes. The model included the Adam optimizer with early stopping based on the validation data loss. 
+The model was trained with four training datasets: Random Oversampler, SMOTE, BorderlineSMOTE, and 
+unbalanced. The best epoch of training for each dataset was saved for use in the Node Light Up 
+perturbation testing. The Node Light Up perturbation testing was performed on each of the four 
+trained models and the top 20 transcription factors with the highest perturbation scores were 
+displayed. 
+
+*For detailed information on the neural network architecture and the Node Light Up perturbation 
+technique, see Magnusson et al., "Deep Neural Network Prediction of Genome-Wide Transcriptome 
+Signatures - beyond the Black-Box" in the References section.* 
 
 ### Part 3: Training Neural Network model on bulk RNA-seq data from ARCHS4 (Macrophage Subtypes):
 
