@@ -56,14 +56,18 @@ of these factors within the forward programming of their iPSC cultures.
 
 ## Methodology
 
-The three parts of this project had differing methodologies:
+##The three parts of this project had differing methodologies:
 
 ### Part 1: Training Logreg, Random Forest, XGBoost on internal RNA-Seq database:
 
-* The contents of this part of the project are within the Non-NN-Pipeline folder of this repository
+*The contents of this part of the project are within the Non-NN-Pipeline folder of this repository*
 
-Part 1 started with the curation of data through the Sequence Read Archive or SRA from the
-NIH. An extensive literature search was performed to find the SRA IDs of wildtype, non-diseased, 
+<p align="center">
+  <img src="Images/Non-NN-Pipeline_image.png" alt="Non-NN Pipeline Image" width="500">
+</p>
+
+Part 1 started with the curation of data through the Sequence Read Archive or SRA. An extensive
+ literature search was performed to find the SRA IDs of wildtype, non-diseased, 
 and unedited cells that were sourced from primary cells or iPSCs. These samples belonged to the 
 myeloid, lymphoid, and non-mesodermal lineages which also included macrophages. There were 122 
 compiled SRA ID numbers that were subsequently Kallisto pseudoaligned to generate gene expression 
@@ -93,6 +97,17 @@ candidates.
 
 ### Part 2: Training Neural Network model on bulk RNA-seq data from ARCHS4 (Immune Cells):
 
+*The contents of this part of the project are within the NN-Pipeline folder of this repository*
+
+<p align="center">
+  <img src="Images/NN-Pipeline-Image.png" alt="NN Pipeline Image" width="500">
+</p>
+
+Part 2 utilized the All RNA-Seq and ChIP-seq Sample and Signature Search or ARCHS4 database which 
+is a comprehensive repository of gene/transcript expression counts from the Gene Expression Omnibus 
+and the SRA. This database contains counts from bulk RNA-seq, single-cell RNA-seq, and ChIP-seq 
+experiments. All of the samples and expression values are contained within an HDF5 file that contains 
+a hierarchical metadata structure. 
 
 ### Part 3: Training Neural Network model on bulk RNA-seq data from ARCHS4 (Macrophage Subtypes):
 
