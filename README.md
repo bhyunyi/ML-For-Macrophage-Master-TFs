@@ -113,11 +113,15 @@ utilization of the archs4py and h5py packages in python. The metadata filtering 
 ---
 
 Filter for transcriptomic data and filter out single-cell data from 'library_source' metadata.
+
   ↓ 
+
 Extract all unique 'source_name_ch1' metadata and create individual source name text files that 
 contain source names for each cell type of interest. Filter out samples from diseased, edited, or 
 immortalized cell lines that did not come from primary cells or iPSCs. 
+
   ↓ 
+
 Filter for known transcription factor genes. 
 
 ---
