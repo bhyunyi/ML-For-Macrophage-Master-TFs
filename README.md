@@ -110,17 +110,17 @@ experiments. All of the samples and expression values are contained within an HD
 a hierarchical metadata structure. The filtering of the HDF5 file was done through the 
 utilization of the archs4py and h5py packages in python. The metadata filtering strategy was as follows:
 
-Filter for transcriptomic data and filter out single-cell data from 'library_source' metadata.
+---
 
-↓
- 
+Filter for transcriptomic data and filter out single-cell data from 'library_source' metadata.
+  ↓ 
 Extract all unique 'source_name_ch1' metadata and create individual source name text files that 
 contain source names for each cell type of interest. Filter out samples from diseased, edited, or 
 immortalized cell lines that did not come from primary cells or iPSCs. 
-
-↓
- 
+  ↓ 
 Filter for known transcription factor genes. 
+
+---
 
 *It is important to note that due to available RAM constraints in NYU's HPC environment, I had to 
 employ a chunking approach to filtering the ARCHS4 HDF5 file where these filters were performed 
@@ -256,6 +256,36 @@ Random Oversampler trained model was used for subsequent Node Light Up testing.
 ---
 
 ## Repository Structure
+
+```text
+ML-For-Macrophage-Master-TFs/
+|
+├── Macrophage_only_NN_pipeline/
+|      ├── ARCHS4_filtering/
+|      |      ├── ARCHS4_Filter_1_2_3.py
+|      |      ├── ARCHS4_Source_name_filtering.ipynb
+|      |      └── Run_ARCHS4_Source_name_filtering.ipynb
+|      ├── ARCHS4_NN_4_Class.ipynb
+|      └── ARCHS4_NN_7_Class.ipynb
+|
+├── NN-Pipeline/
+|      ├── ARCHS4_filtering/
+|      |      ├── ARCHS4_Filtering.py
+|      |      ├── ARCHS4_TF_Filter.py
+|      |      ├── ARCHS4_filtering.ipynb
+|      |      ├── ARCS4_SC_filter.py
+|      |      ├── Run_ARCHS4_SC_Filtering_1.sbatch
+|      |      ├── Run_ARCHS4_filtering_2.sbatch
+|      |      └── Run_TFs_ARCHS4_filter_3.sbatch
+|      ├── ARCHS4_NN.ipynb
+|      └── Node_Light_Up.ipynb
+|
+├── Non-NN-Pipeline/
+|      └── ML_Non-NN_Final.ipynb
+|
+└── README.md 
+
+```
 
 ---
 
