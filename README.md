@@ -146,7 +146,17 @@ The model was trained with four training datasets: Random Oversampler, SMOTE, Bo
 unbalanced. The best epoch of training for each dataset was saved for use in the Node Light Up 
 perturbation testing. The Node Light Up perturbation testing was performed on each of the four 
 trained models and the top 20 transcription factors with the highest perturbation scores were 
-displayed. 
+displayed.
+
+The Node Light up perturbation testing was adapted from Rasmus Magnusson's research. This test 
+assesses how perturbations of individual transcription factor expression levels influence the 
+predictions of trained neural networks. A square matrix is produced wherein each row has the 
+averaged expression values of all 13,146 transcription factor inputs for the neural network. This 
+baseline or background expression matrix has its diagonal values either halved for doubled so that 
+each row in the matrix represents a single transcription factor perturbation. The doubled and 
+halved matrices are then evaluated by the trained neural network to see which perturbed 
+transcription factor (whether halved or doubled) resulted in the highest change in softmax 
+probability to being classified as the target cell type (macrophage, monocyte, microglia, etc.).  
 
 *For detailed information on the neural network architecture and the Node Light Up perturbation 
 technique, see Magnusson et al., "Deep Neural Network Prediction of Genome-Wide Transcriptome 
@@ -255,10 +265,6 @@ Random Oversampler trained model was used for subsequent Node Light Up testing.
 
 ---
 
-## Feature Selection and TF Perturbation Results
-
----
-
 ## Repository Structure
 
 ```text
@@ -294,6 +300,19 @@ ML-For-Macrophage-Master-TFs/
 ---
 
 ## Limitations and Next Steps
+
+The main limitations within this project were data availability and accurate querying of the ARCHS4 
+database. For Part #1 of this project, since the input data for the machine learning models had to 
+be manually curated from the SRA, I was unable to sufficiently find a similar number of samples 
+as I could with the ARCHS4 database. Although the ARCHS4 database permitted a much more efficient 
+method of big data curation, it was difficult to accurately query for specific cell types within 
+the confines of the sample type restrictions that I was looking for. For example, I was heavily 
+reliant on ARCHS4's "source_names_ch1" metadata field that can by highly variable due to 
+inconsistent sample naming conventions employed accross studies. This may have caused my querying 
+methods to include unwanted samples within the training data. I plan to test the ARCHS4 queried 
+data with the models used in Part #1 of this project to see if the highlight features are 
+comparable to the neural networks. I also plan on doing a more comprehensive assessment of the 
+numerous other metadata fields within ARCHS4 to find more reliable ways to filter the data. 
 
 ---
 
