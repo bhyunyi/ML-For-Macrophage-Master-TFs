@@ -265,6 +265,48 @@ Random Oversampler trained model was used for subsequent Node Light Up testing.
 
 ---
 
+## Feature Selection and TF Perturbation Results:
+
+Most of the top 20 transcription factor lists from all three parts of the project included known 
+master transcription factors and other key genes associated to macrophage function and polarization. 
+These included JUNB, JUND, SPI1, MAFB, STAT1, STAT4, and IRF1. This demonstrates that machine 
+learning models can highlight important factors for specific cell types.  
+
+Key candidate transcription factors were ZNF385A, TSC22D1, CEBPA, and CEBPB. These factors were 
+chosen by scientists in the Truong lab for further study and consideration in forward programming 
+circuits. ZNF385A and TSC22D1 were factors that arose in many top 20 lists throughout the project 
+while CEBPA, and CEBPB were highlighted by literature searches.
+
+---
+
+### Feature Important Scores from XGBoost:
+
+<p align="center">
+  <img src="Images/XGB_top_M0.png" alt="XGB_top_M0" width="500">
+</p>
+
+<p align="center">
+  <img src="Images/XGB_top_M1.png" alt="XGB_top_M1" width="500">
+</p>
+
+<p align="center">
+  <img src="Images/XGB_top_M2.png" alt="XGB_top_M2" width="500">
+</p>
+
+---
+
+### Node Light Up Perturbation Scores from BLSMOTE Balanced macrophage data:
+
+<p align="center">
+  <img src="Images/BLSMOTE_4class_macrophages.png" alt="BLSMOTE_4class_macrophages" width="500">
+</p>
+
+<p align="center">
+  <img src="Images/BLSMOTE_4class_microglia.png" alt="BLSMOTE_4class_microglia" width="500">
+</p>
+
+___
+
 ## Repository Structure
 
 ```text
